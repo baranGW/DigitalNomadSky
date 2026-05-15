@@ -16,7 +16,7 @@ if source == 'azure':
       # Azure SDK code to find VM
       sys.path.append(r"C:/projects/digitalnomadsky/code/Microsoft")
       import config
-      from fetching_vm import fetch_vm
+      from Microsoft.fetching_vm import fetch_vm
           
       try:
             result = fetch_vm(vmname)
@@ -27,7 +27,7 @@ elif source == 'cyso':
       # cyso openstack SDK code to find VM
       sys.path.append(r"C:/projects/digitalnomadsky/code/Cyso")
       import config
-      from fetching_vm import fetch_vm
+      from Cyso.fetching_vm import fetch_vm
       try:
             result = fetch_vm(vmname)
       except IndexError:
@@ -37,7 +37,7 @@ elif source == 'leaf':
       # leaf openstack SDK code to find VM
       sys.path.append(r"C:/projects/digitalnomadsky/code/Leafcloud")
       import config
-      from fetching_vm import fetch_vm
+      from Leafcloud.fetching_vm import fetch_vm
       try:
             result = fetch_vm(vmname)
       except IndexError:
@@ -46,7 +46,7 @@ elif source == 'stackit':
       # openstack SDK code to find VM
       sys.path.append(r"C:/projects/digitalnomadsky/code/stackit")
       import config
-      from fetching_vm import fetch_vm
+      from Stackit.fetching_vm import fetch_vm
       try:
             result = fetch_vm(vmname)
       except IndexError:
@@ -56,7 +56,7 @@ elif source == 'aws':
       # Amazon SDK code to find VM
       sys.path.append(r"C:/projects/digitalnomadsky/code/Amazon")
       import config
-      from fetching_vm import search_ec2_instance
+      from Amazon.fetching_vm import search_ec2_instance
           
       try:
             result = search_ec2_instance(vmname)
@@ -67,10 +67,10 @@ elif source == 'huawei':
       # huawei SDK code to find VM
       sys.path.append(r"C:/projects/digitalnomadsky/code/Huawei")
       import config
-      from fetching_vm import search_huawei_vm
+      from Huawei.fetching_vm import search_huawei_vm
           
       try:
-            result = search_huawei_vm(vmname)
+            result = search_huawei_vm()
       except IndexError:
         raise Exception('something went wrong, the vm is not found in Huawei Cloud!')  
 else:

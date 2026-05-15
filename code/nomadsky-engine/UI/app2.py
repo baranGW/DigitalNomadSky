@@ -65,7 +65,10 @@ def show_processing_page():
         f.write(html)
     
     # Load as URL instead
-    window.load_url(temp_path)
+    target_window = window if window is not None else (webview.windows[0] if webview.windows else None)
+    if target_window is None:
+        raise RuntimeError('Webview window is not available to load the processing page.')
+    target_window.load_url(temp_path)
     
 
 # Pywebview API

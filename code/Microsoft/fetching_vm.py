@@ -13,7 +13,7 @@ def fetch_vm(vmname):
         from azure.identity import InteractiveBrowserCredential
         from azure.mgmt.resource import ResourceManagementClient
         from azure.mgmt.compute import ComputeManagementClient
-        from azure.mgmt.resource import SubscriptionClient
+        from azure.mgmt.subscription import SubscriptionClient
         from azure.core.exceptions import HttpResponseError
         # Get arguments
         source = sys.argv[1]
@@ -24,7 +24,9 @@ def fetch_vm(vmname):
         
 
         # Use interactive browser login
-        tenant_id = config.tenantid
+        tenant_id = getattr(config, 'tenantid', None)
+        if not tenant_id:
+            raise AttributeError("'tenantid' not found in config module")
         credential = InteractiveBrowserCredential(tenant_id=tenant_id)
 
         # -------------------------------
@@ -36,17 +38,24 @@ def fetch_vm(vmname):
         for sub in subscription_client.subscriptions.list():
                 try:
                     subscription_ids = sub.subscription_id
+                    if not subscription_ids:
+                        continue
                     compute_client = ComputeManagementClient(credential, subscription_ids)
                     resource_client = ResourceManagementClient(credential, subscription_ids)
                     vms = compute_client.virtual_machines.list_all()
                     for vm in vms:
-                        if vm.name.lower() == vmname:
+                        if vm.name and vm.name.lower() == vmname:
                              # print(f"VM '{vmname}' found!")
                              # VM found
                              vm_found = True
              
                              # VM basic info
-                             resource_group  = vm.id.split("/")[4]
+                             vm_id = getattr(vm, 'id', None)
+                             if not vm_id:
+                                 # skip VMs without an id
+                                 vm_found = False
+                                 continue
+                             resource_group  = vm_id.split("/")[4]
                              full_vm = compute_client.virtual_machines.get(resource_group, vmname, expand="instanceView")
                              vm_size = vm.hardware_profile.vm_size
                              os_type = full_vm.storage_profile.os_disk.os_type
@@ -59,9 +68,10 @@ def fetch_vm(vmname):
                                     resource_group_name=resource_group,
                                     vm_name=vmname
                                 )
-                             for status in instance_view.statuses:
-                                    if status.code.startswith('PowerState/'):
-                                        power_state = status.code.split('/')[-1]  # 'running', 'deallocated', 'stopped', etc.
+                             if instance_view.statuses:
+                                    for status in instance_view.statuses:
+                                        if status.code and status.code.startswith('PowerState/'):
+                                            power_state = status.code.split('/')[-1]  # 'running', 'deallocated', 'stopped', etc.
                              break
                 except HttpResponseError as e:
                      #print(f"Skipping subscription {sub.subscription_id}: {e.message}")
