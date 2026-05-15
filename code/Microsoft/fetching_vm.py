@@ -9,7 +9,8 @@
 def fetch_vm(vmname):
         import sys
         import json
-        sys.path.append(r"C:/projects/digitalnomadsky/code/Microsoft")
+        from pathlib import Path
+        sys.path.append(str(Path(__file__).resolve().parent))
         from azure.identity import InteractiveBrowserCredential
         from azure.mgmt.resource import ResourceManagementClient
         from azure.mgmt.compute import ComputeManagementClient
@@ -20,8 +21,6 @@ def fetch_vm(vmname):
         destination = sys.argv[2]
         vmname = sys.argv[3].lower()
         import config
-
-        
 
         # Use interactive browser login
         tenant_id = getattr(config, 'tenantid', None)
