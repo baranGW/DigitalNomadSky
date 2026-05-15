@@ -6,6 +6,7 @@ import subprocess
 import threading
 import json
 from datetime import datetime
+import sys
 
 unique_id = datetime.now().strftime("%Y%m%d%H%M%S%f")
 
@@ -31,7 +32,7 @@ def run_script():
     script_path = f'C:/projects/digitalnomadsky/code/nomadsky-engine/scripts/{script_name}'  
     try:
         result = subprocess.run(
-            ['python', script_path, source, destination, vmname, json.dumps(extraValue), unique_id],
+            [sys.executable, script_path, source, destination, vmname, json.dumps(extraValue), unique_id],
             capture_output=True,
             text=True,
             check=True

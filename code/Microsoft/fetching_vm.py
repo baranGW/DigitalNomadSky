@@ -5,7 +5,6 @@
 # When running this script for testing, fill in a vmname that exists in Azure 
 # -------------------------------
 
-
 def fetch_vm(vmname):
         import sys
         import json
