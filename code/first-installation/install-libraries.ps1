@@ -5,6 +5,7 @@ py -m pip install opencensus-ext-azure
 #runnning azure
 py -m pip install azure-identity azure-mgmt-compute
 py -m pip install azure-mgmt-resource
+py -m pip install azure-mgmt-subscription
 py -m pip install requests
 py -m pip install azure-storage-blob
 py -m pip install azure-mgmt-storage
