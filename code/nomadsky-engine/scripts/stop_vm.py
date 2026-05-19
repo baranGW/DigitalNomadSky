@@ -4,6 +4,8 @@ from datetime import datetime, timezone
 from opencensus.ext.azure.log_exporter import AzureLogHandler
 import logging
 
+# Base path constant
+BASE_CODE_PATH = r"C:/Users/baran/Documents/school/Jaar2/DataDrivenBusiness/DigitalNomadSky/code"
 
 # Get arguments
 source = sys.argv[1]
@@ -15,9 +17,9 @@ unique_id = sys.argv[5]
 
 if source == 'azure':
       # Azure SDK code to stop VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Microsoft")
-      import config
-      from stopping_vm import stop_vm
+      sys.path.append(BASE_CODE_PATH)
+      import Microsoft.config
+      from Microsoft.stopping_vm import stop_vm
           
       try:
             result = stop_vm(shared_data)
@@ -27,9 +29,9 @@ if source == 'azure':
 
 elif source == 'cyso':
       # cyso SDK code to stop VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Cyso")
-      import config
-      from stopping_vm import stop_vm
+      sys.path.append(BASE_CODE_PATH)
+      import Cyso.config
+      from Cyso.stopping_vm import stop_vm
           
       try:
             result = stop_vm()
@@ -39,9 +41,9 @@ elif source == 'cyso':
 
 elif source == 'leaf':
       # leaf SDK code to stop VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Leafcloud")
-      import config
-      from stopping_vm import stop_vm
+      sys.path.append(BASE_CODE_PATH)
+      import Leafcloud.config
+      from Leafcloud.stopping_vm import stop_vm
           
       try:
             result = stop_vm()
@@ -51,9 +53,9 @@ elif source == 'leaf':
 
 elif source == 'stackit':
       # Stackit SDK code to stop VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Stackit")
-      import config
-      from stopping_vm import stop_vm
+      sys.path.append(BASE_CODE_PATH)
+      import Stackit.config
+      from Stackit.stopping_vm import stop_vm
           
       try:
             result = stop_vm()
@@ -63,9 +65,9 @@ elif source == 'stackit':
             
 elif source == 'aws':
       # AWS SDK code to stop VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Amazon")
-      import config
-      from stopping_vm import stop_aws_vm
+      sys.path.append(BASE_CODE_PATH)
+      import Amazon.config
+      from Amazon.stopping_vm import stop_aws_vm
           
       try:
             result = stop_aws_vm(shared_data)
@@ -75,9 +77,9 @@ elif source == 'aws':
 
 elif source == 'huawei':
       # Huawei SDK code to stop VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Huawei")
-      import config
-      from stopping_vm import stop_huawei_vm
+      sys.path.append(BASE_CODE_PATH)
+      import Huawei.config
+      from Huawei.stopping_vm import stop_huawei_vm
           
       try:
             result = stop_huawei_vm(shared_data)

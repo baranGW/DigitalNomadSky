@@ -1,19 +1,19 @@
 def start_vm (shared_data):
   import sys
-  sys.path.append(r"C:/projects/digitalnomadsky/code/Microsoft")
+  sys.path.append(r"C:/Users/baran/Documents/school/Jaar2/DataDrivenBusiness/DigitalNomadSky/code")
   from azure.identity import InteractiveBrowserCredential
   from azure.mgmt.compute import ComputeManagementClient
   from azure.mgmt.network import NetworkManagementClient
   from azure.mgmt.resource import ResourceManagementClient
   from azure.mgmt.compute.models import Disk, CreationData, DiskCreateOption, SecurityProfile, UefiSettings, VirtualMachine, HardwareProfile, StorageProfile, OSDisk, OSProfile, NetworkProfile, NetworkInterfaceReference, ManagedDiskParameters, SecurityTypes, DiskSecurityProfile
-  import config
+  import Microsoft.config
   import re
     
 
-  subscription_id = config.subscription_id
-  resource_group = config.resource_group
+  subscription_id = Microsoft.config.subscription_id
+  resource_group = Microsoft.config.resource_group
   vm_name = shared_data.get('vm_name', '')
-  location = config.location
+  location = Microsoft.config.location
   account_url = shared_data.get('account_url', '')
   nic_id = shared_data.get('nic_id', '')
   os_type = shared_data.get('os_type', '')
@@ -22,12 +22,12 @@ def start_vm (shared_data):
   disktype = shared_data.get('importdisktype', '')
   blob_name = f"osdisk{vm_name}.{disktype}"
   disk_name = f"disk-name-mooi-{vm_name}"
-  vhd_url = account_url + "/" + config.container_name + "/" + blob_name
+  vhd_url = account_url + "/" + Microsoft.config.container_name + "/" + blob_name
   
 
   #vhd_url = 'https://compliceert20.blob.core.windows.net/vhds/osdisk.vhd'
   
-  tenant_id = config.destionationtenantid
+  tenant_id = Microsoft.config.destionationtenantid
   credential = InteractiveBrowserCredential(tenant_id=tenant_id)
   compute_client = ComputeManagementClient(credential, subscription_id)
   network_client = NetworkManagementClient(credential, subscription_id)

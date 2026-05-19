@@ -9,14 +9,14 @@
 def stop_vm(shared_data):
         import sys
         import json
-        sys.path.append(r"C:/projects/digitalnomadsky/code/Microsoft")
+        sys.path.append(r"C:/Users/baran/Documents/school/Jaar2/DataDrivenBusiness/DigitalNomadSky/code")
         from azure.identity import InteractiveBrowserCredential
         from azure.mgmt.compute import ComputeManagementClient
         # Get arguments
         source = sys.argv[1]
         destination = sys.argv[2]
         vmname = sys.argv[3].lower()
-        import config
+        import Microsoft.config
         shared_data_json = sys.argv[4]  # 4th argument
         shared_data = json.loads(shared_data_json)
         # Extract specific value
@@ -32,7 +32,7 @@ def stop_vm(shared_data):
             return
 
         # Authenticate interactively
-        tenant_id = config.tenantid
+        tenant_id = Microsoft.config.tenantid
         credential = InteractiveBrowserCredential(tenant_id=tenant_id)
 
         # Create compute client

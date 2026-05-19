@@ -9,7 +9,7 @@ def fetch_vm(vmname):
         import sys
         import json
         from pathlib import Path
-        sys.path.append(str(Path(__file__).resolve().parent))
+        sys.path.append(r"C:/Users/baran/Documents/school/Jaar2/DataDrivenBusiness/DigitalNomadSky/code")
         from azure.identity import InteractiveBrowserCredential
         from azure.mgmt.resource import ResourceManagementClient
         from azure.mgmt.compute import ComputeManagementClient
@@ -19,10 +19,10 @@ def fetch_vm(vmname):
         source = sys.argv[1]
         destination = sys.argv[2]
         vmname = sys.argv[3].lower()
-        import config
+        import Microsoft.config
 
         # Use interactive browser login
-        tenant_id = getattr(config, 'tenantid', None)
+        tenant_id = getattr(Microsoft.config, 'tenantid', None)
         if not tenant_id:
             raise AttributeError("'tenantid' not found in config module")
         credential = InteractiveBrowserCredential(tenant_id=tenant_id)

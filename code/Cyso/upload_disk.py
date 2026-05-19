@@ -14,7 +14,7 @@ def uploading_disk(vm_name):
     from keystoneauth1.identity import v3
     import getpass
     import json
-    sys.path.append(r"C:/projects/digitalnomadsky/code/Cyso")
+    sys.path.append(r"C:/Users/baran/Documents/school/Jaar2/DataDrivenBusiness/DigitalNomadSky/code")
     import tkinter as tk
     from tkinter import simpledialog
     import time
@@ -26,7 +26,7 @@ def uploading_disk(vm_name):
     source = sys.argv[1]
     destination = sys.argv[2]
     vm_name = sys.argv[3].lower()
-    import config
+    import Cyso.config
     
     chunk_size = 50 * 1024 * 1024  # 50 MB per chunk
     shared_data_json = sys.argv[4]  # 4th argument
@@ -63,8 +63,8 @@ def uploading_disk(vm_name):
     root.destroy()
 
     auth = ApplicationCredential(
-     auth_url=os.environ.get('OS_AUTH_URL', config.destinationcloudurl),
-     application_credential_id=config.OS_APPLICATION_CREDENTIAL_ID,
+     auth_url=os.environ.get('OS_AUTH_URL', Cyso.config.destinationcloudurl),
+     application_credential_id=Cyso.config.OS_APPLICATION_CREDENTIAL_ID,
      application_credential_secret= password
     )
     sess = session.Session(auth=auth)
@@ -100,7 +100,7 @@ def uploading_disk(vm_name):
             return {'message' : f"Image {image_name} uploaded (ID: {image.id})",
                    'image_id' : image.id}
         elif img.status == 'error':
-            raise IndexError(f"VM '{vmname}' upload failed in {destination}")
+            raise IndexError(f"VM '{vm_name}' upload failed in {destination}")
         time.sleep(20)
     
-    raise IndexError(f"VM '{vmname}' image creation timeout in {destination}")
+    raise IndexError(f"VM '{vm_name}' image creation timeout in {destination}")

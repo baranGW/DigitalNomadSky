@@ -1,28 +1,28 @@
 def upload_disk(shared_data):
     
     import sys
-    sys.path.append(r"C:/projects/digitalnomadsky/code/Microsoft")
+    sys.path.append(r"C:/Users/baran/Documents/school/Jaar2/DataDrivenBusiness/DigitalNomadSky/code")
     from azure.mgmt.storage import StorageManagementClient
     from azure.storage.blob import BlobServiceClient, BlobClient
     import os
     from azure.identity import InteractiveBrowserCredential
-    import config
+    import Microsoft.config
     from azure.core.exceptions import ResourceNotFoundError
 
 
     # Variables
-    subscription_id = config.subscription_id
-    resource_group = config.resource_group
-    storage_account_name = config.storage_account_name 
-    location = config.location 
-    container_name = config.container_name
+    subscription_id = Microsoft.config.subscription_id
+    resource_group = Microsoft.config.resource_group
+    storage_account_name = Microsoft.config.storage_account_name 
+    location = Microsoft.config.location 
+    container_name = Microsoft.config.container_name
     vhd_path = shared_data.get('output_path', '')
     disktype = shared_data.get('importdisktype', '')
     vm_name = shared_data.get('vm_name', '')
     blob_name = f"osdisk{vm_name}.{disktype}"
     account_url = f"https://{storage_account_name}.blob.core.windows.net"
 
-    tenant_id = config.destionationtenantid
+    tenant_id = Microsoft.config.destionationtenantid
     credential = InteractiveBrowserCredential(tenant_id=tenant_id)
 
     # Create storage account

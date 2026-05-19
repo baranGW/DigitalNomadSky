@@ -5,6 +5,9 @@ from datetime import datetime, timezone
 from opencensus.ext.azure.log_exporter import AzureLogHandler
 import logging
 
+# Base path constant
+BASE_CODE_PATH = r"C:/Users/baran/Documents/school/Jaar2/DataDrivenBusiness/DigitalNomadSky/code"
+
 # Get arguments
 source = sys.argv[1]
 destination = sys.argv[2]
@@ -14,8 +17,8 @@ unique_id = sys.argv[5]
 
 if source == 'azure':
       # Azure SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Microsoft")
-      import config
+      sys.path.append(BASE_CODE_PATH)
+      import Microsoft.config
       from Microsoft.fetching_vm import fetch_vm
           
       try:
@@ -25,8 +28,8 @@ if source == 'azure':
 
 elif source == 'cyso':
       # cyso openstack SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Cyso")
-      import config
+      sys.path.append(BASE_CODE_PATH)
+      import Cyso.config
       from Cyso.fetching_vm import fetch_vm
       try:
             result = fetch_vm(vmname)
@@ -35,8 +38,8 @@ elif source == 'cyso':
 
 elif source == 'leaf':
       # leaf openstack SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Leafcloud")
-      import config
+      sys.path.append(BASE_CODE_PATH)
+      import Leafcloud.config
       from Leafcloud.fetching_vm import fetch_vm
       try:
             result = fetch_vm(vmname)
@@ -44,8 +47,8 @@ elif source == 'leaf':
         raise Exception('something went wrong, the vm is not found in Leaf.Cloud!')  
 elif source == 'stackit':
       # openstack SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/stackit")
-      import config
+      sys.path.append(BASE_CODE_PATH)
+      import Stackit.config
       from Stackit.fetching_vm import fetch_vm
       try:
             result = fetch_vm(vmname)
@@ -54,8 +57,8 @@ elif source == 'stackit':
 
 elif source == 'aws':
       # Amazon SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Amazon")
-      import config
+      sys.path.append(BASE_CODE_PATH)
+      import Amazon.config
       from Amazon.fetching_vm import search_ec2_instance
           
       try:
@@ -65,8 +68,8 @@ elif source == 'aws':
 
 elif source == 'huawei':
       # huawei SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Huawei")
-      import config
+      sys.path.append(BASE_CODE_PATH)
+      import Huawei.config
       from Huawei.fetching_vm import search_huawei_vm
           
       try:
@@ -81,7 +84,7 @@ else:
 #Find optimal disktypeformat
 # ------
 
-sys.path.append(r"C:/projects/digitalnomadsky/code/nomadsky-engine/scripts")
+sys.path.append(os.path.join(BASE_CODE_PATH, "nomadsky-engine/scripts"))
 import general_parameters 
 
 def find_best_format(source_platform, destination_platform):
@@ -126,4 +129,3 @@ logger.info(data)
 #result = my_function(5)
 #exportdisktype = shared_data.get('exportdisktype', '')
 #a, b = my_function(10)
-

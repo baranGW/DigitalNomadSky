@@ -4,6 +4,8 @@ from datetime import datetime, timezone
 from opencensus.ext.azure.log_exporter import AzureLogHandler
 import logging
 
+# Base path constant
+BASE_CODE_PATH = r"C:/Users/baran/Documents/school/Jaar2/DataDrivenBusiness/DigitalNomadSky/code"
 
 # Get arguments
 source = sys.argv[1]
@@ -15,9 +17,9 @@ unique_id = sys.argv[5]
 
 if destination == 'azure':
       # Azure SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Microsoft")
-      import config
-      from create_vm import start_vm
+      sys.path.append(BASE_CODE_PATH)
+      import Microsoft.config
+      from Microsoft.create_vm import start_vm
           
       try:
             nic = start_vm(shared_data)
@@ -30,9 +32,9 @@ if destination == 'azure':
 
 elif destination == 'cyso':
       # cyso SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Cyso")
-      import config
-      from starting_vm import create_vm_from_image
+      sys.path.append(BASE_CODE_PATH)
+      import Cyso.config
+      from Cyso.starting_vm import create_vm_from_image
           
       try:
             nic = create_vm_from_image(shared_data)
@@ -42,9 +44,9 @@ elif destination == 'cyso':
 
 elif destination == 'leaf':
       # leaf SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Leafcloud")
-      import config
-      from starting_vm import create_vm_from_image
+      sys.path.append(BASE_CODE_PATH)
+      import Leafcloud.config
+      from Leafcloud.starting_vm import create_vm_from_image
           
       try:
             nic = create_vm_from_image(shared_data)
@@ -53,9 +55,9 @@ elif destination == 'leaf':
         raise Exception(f" something went wrong the vm is not created.")
 elif destination == 'stackit':
       # stackit SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Stackit")
-      import config
-      from starting_vm import create_vm_from_image
+      sys.path.append(BASE_CODE_PATH)
+      import Stackit.config
+      from Stackit.starting_vm import create_vm_from_image
           
       try:
             nic = create_vm_from_image(shared_data)

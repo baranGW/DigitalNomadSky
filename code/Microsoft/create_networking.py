@@ -1,18 +1,18 @@
 def create_network(shared_data):
     import sys
-    sys.path.append(r"C:/projects/digitalnomadsky/code/Microsoft")
+    sys.path.append(r"C:/Users/baran/Documents/school/Jaar2/DataDrivenBusiness/DigitalNomadSky/code")
     from azure.identity import InteractiveBrowserCredential
-    import config
+    import Microsoft.config
     from azure.mgmt.network import NetworkManagementClient
     from azure.core.exceptions import ResourceExistsError, HttpResponseError
 
-    subscription_id = config.subscription_id
-    resource_group = config.resource_group
-    location = config.location
+    subscription_id = Microsoft.config.subscription_id
+    resource_group = Microsoft.config.resource_group
+    location = Microsoft.config.location
     vnet_base_name = 'vnet-vms'
     nic_base_name = 'nic-vm'
-    
-    tenant_id = config.destionationtenantid
+
+    tenant_id = Microsoft.config.destionationtenantid
     credential = InteractiveBrowserCredential(tenant_id=tenant_id)
     network_client = NetworkManagementClient(credential, subscription_id)
 

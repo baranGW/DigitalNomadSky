@@ -15,7 +15,7 @@ def export_os_disk(vm_name):
     from keystoneauth1.identity import v3
     import getpass
     import json
-    sys.path.append(r"C:/projects/digitalnomadsky/code/Cyso")
+    sys.path.append(r"C:/Users/baran/Documents/school/Jaar2/DataDrivenBusiness/DigitalNomadSky/code")
     import tkinter as tk
     from tkinter import simpledialog
     import time
@@ -26,7 +26,7 @@ def export_os_disk(vm_name):
     source = sys.argv[1]
     destination = sys.argv[2]
     vm_name = sys.argv[3].lower()
-    import config
+    import Cyso.config
     output_path= fr"C:\Temp\osdisk-{vm_name}.qcow2"
     chunk_size = 50 * 1024 * 1024  # 50 MB per chunk
 
@@ -66,8 +66,8 @@ def export_os_disk(vm_name):
     root.destroy()
 
     auth = ApplicationCredential(
-     auth_url=os.environ.get('OS_AUTH_URL', config.sourcecloudurl),
-     application_credential_id=config.OS_APPLICATION_CREDENTIAL_ID,
+     auth_url=os.environ.get('OS_AUTH_URL', Cyso.config.sourcecloudurl),
+     application_credential_id=Cyso.config.OS_APPLICATION_CREDENTIAL_ID,
      application_credential_secret= password
     )
     sess = session.Session(auth=auth)
@@ -76,7 +76,7 @@ def export_os_disk(vm_name):
     # Find VM by name
     servers = nova.servers.list(search_opts={'name': vm_name})
     if not servers:
-        raise IndexError(f"VM '{vmname}' not found {source}")
+        raise IndexError(f"VM '{vm_name}' not found {source}")
     
     server = servers[0]
     glance = glance_client.Client("2", session=sess)

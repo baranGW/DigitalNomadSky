@@ -15,18 +15,18 @@ def download_vm(shared_data):
         import requests
         from requests.exceptions import ConnectionError, ChunkedEncodingError
         from datetime import datetime, timedelta, timezone
-        sys.path.append(r"C:/projects/digitalnomadsky/code/Microsoft")
+        sys.path.append(r"C:/Users/baran/Documents/school/Jaar2/DataDrivenBusiness/DigitalNomadSky/code")
         from azure.identity import InteractiveBrowserCredential
         from azure.mgmt.compute import ComputeManagementClient
         from azure.mgmt.resource import ResourceManagementClient
-        from azure.mgmt.resource import SubscriptionClient
+        from azure.mgmt.subscription import SubscriptionClient
         from azure.core.exceptions import HttpResponseError
 
         # Get arguments
         source = sys.argv[1]
         destination = sys.argv[2]
         vmname = sys.argv[3].lower()
-        import config
+        import Microsoft.config
         shared_data_json = sys.argv[4]  # 4th argument
         shared_data = json.loads(shared_data_json)
         # Extract specific value
@@ -52,7 +52,7 @@ def download_vm(shared_data):
         
         else: 
               # Use interactive browser login
-              tenant_id = config.tenantid
+              tenant_id = Microsoft.config.tenantid
               credential = InteractiveBrowserCredential(tenant_id=tenant_id)
 
               # -------------------------------

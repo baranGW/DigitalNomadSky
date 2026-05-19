@@ -4,6 +4,8 @@ from datetime import datetime, timezone
 from opencensus.ext.azure.log_exporter import AzureLogHandler
 import logging
 
+# Base path constant
+BASE_CODE_PATH = r"C:/Users/baran/Documents/school/Jaar2/DataDrivenBusiness/DigitalNomadSky/code"
 
 # Get arguments
 source = sys.argv[1]
@@ -15,9 +17,9 @@ unique_id = sys.argv[5]
 
 if source == 'azure':
       # Azure SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Microsoft")
-      import config
-      from downloading_vm import download_vm
+      sys.path.append(BASE_CODE_PATH)
+      import Microsoft.config
+      from Microsoft.downloading_vm import download_vm
       try:
             result = download_vm(shared_data)
             print(json.dumps(result))
@@ -26,9 +28,9 @@ if source == 'azure':
 
 elif source == 'cyso':
       # cyso SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Cyso")
-      import config
-      from downloading_vm import export_os_disk
+      sys.path.append(BASE_CODE_PATH)
+      import Cyso.config
+      from Cyso.downloading_vm import export_os_disk
       try:
             result = export_os_disk(vmname)
             print(json.dumps(result))
@@ -37,9 +39,9 @@ elif source == 'cyso':
 
 elif source == 'leaf':
       # leaf SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Leafcloud")
-      import config
-      from downloading_vm import export_os_disk
+      sys.path.append(BASE_CODE_PATH)
+      import Leafcloud.config
+      from Leafcloud.downloading_vm import export_os_disk
       try:
             result = export_os_disk(vmname)
             print(json.dumps(result))
@@ -47,9 +49,9 @@ elif source == 'leaf':
         raise Exception(f" VM could not be downloaded: '{shared_data}' ")
 elif source == 'stackit':
       # SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Stackit")
-      import config
-      from downloading_vm import export_os_disk
+      sys.path.append(BASE_CODE_PATH)
+      import Stackit.config
+      from Stackit.downloading_vm import export_os_disk
       try:
             result = export_os_disk(vmname)
             print(json.dumps(result))
@@ -58,9 +60,9 @@ elif source == 'stackit':
 
 elif source == 'aws':
       # AWS SDK code to download VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Amazon")
-      import config
-      from downloading_vm import  download_aws_osdisk
+      sys.path.append(BASE_CODE_PATH)
+      import Amazon.config
+      from Amazon.downloading_vm import  download_aws_osdisk
       try:
             result =  download_aws_osdisk(shared_data)
             print(json.dumps(result))
@@ -68,9 +70,9 @@ elif source == 'aws':
         raise Exception(f" VM could not be downloaded: '{shared_data}' ")
 elif source == 'huawei':
       # huawei SDK code to download VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Huawei")
-      import config
-      from downloading_image import  download_huawei_vm
+      sys.path.append(BASE_CODE_PATH)
+      import Huawei.config
+      from Huawei.downloading_image import  download_huawei_vm
       try:
             result =  download_huawei_vm(shared_data)
             print(json.dumps(result))

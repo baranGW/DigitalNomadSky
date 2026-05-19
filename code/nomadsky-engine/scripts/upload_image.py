@@ -4,6 +4,9 @@ from datetime import datetime, timezone
 from opencensus.ext.azure.log_exporter import AzureLogHandler
 import logging
 
+# Base path constant
+BASE_CODE_PATH = r"C:/Users/baran/Documents/school/Jaar2/DataDrivenBusiness/DigitalNomadSky/code"
+
 # Get arguments
 source = sys.argv[1]
 destination = sys.argv[2]
@@ -14,9 +17,9 @@ unique_id = sys.argv[5]
 
 if destination == 'azure':
       # Azure SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Microsoft")
-      import config
-      from upload_disk import upload_disk
+      sys.path.append(BASE_CODE_PATH)
+      import Microsoft.config
+      from Microsoft.upload_disk import upload_disk
           
       try:
             url = upload_disk(shared_data)
@@ -26,9 +29,9 @@ if destination == 'azure':
 
 elif destination == 'cyso':
       # cyso SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Cyso")
-      import config
-      from upload_disk import uploading_disk
+      sys.path.append(BASE_CODE_PATH)
+      import Cyso.config
+      from Cyso.upload_disk import uploading_disk
           
       try:
             url = uploading_disk(shared_data)
@@ -38,9 +41,9 @@ elif destination == 'cyso':
 
 elif destination == 'leaf':
       # leaf SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Leafcloud")
-      import config
-      from upload_disk import uploading_disk
+      sys.path.append(BASE_CODE_PATH)
+      import Leafcloud.config
+      from Leafcloud.upload_disk import uploading_disk
           
       try:
             url = uploading_disk(shared_data)
@@ -49,9 +52,9 @@ elif destination == 'leaf':
         raise Exception(f" Invalid format: '{shared_data}' ")
 elif destination == 'stackit':
       # stackit SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Stackit")
-      import config
-      from upload_disk import uploading_disk
+      sys.path.append(BASE_CODE_PATH)
+      import Stackit.config
+      from Stackit.upload_disk import uploading_disk
           
       try:
             url = uploading_disk(shared_data)

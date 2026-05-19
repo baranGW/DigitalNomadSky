@@ -13,7 +13,7 @@ def create_vm_from_image(shared_data):
     from keystoneauth1 import session
     from keystoneauth1.identity import v3
     import json
-    sys.path.append(r"C:/projects/digitalnomadsky/code/Cyso")
+    sys.path.append(r"C:/Users/baran/Documents/school/Jaar2/DataDrivenBusiness/DigitalNomadSky/code")
     import tkinter as tk
     from tkinter import simpledialog
     import time
@@ -25,7 +25,7 @@ def create_vm_from_image(shared_data):
     destination = sys.argv[2]
     vm_name = sys.argv[3].lower()
     vmname=f"{vm_name}-new"
-    import config
+    import Cyso.config
     shared_data_json = sys.argv[4]  # 4th argument
     shared_data = json.loads(shared_data_json)
     # Extract specific value
@@ -57,8 +57,8 @@ def create_vm_from_image(shared_data):
     root.destroy()
 
     auth = ApplicationCredential(
-     auth_url=os.environ.get('OS_AUTH_URL', config.destinationcloudurl),
-     application_credential_id=config.OS_APPLICATION_CREDENTIAL_ID,
+     auth_url=os.environ.get('OS_AUTH_URL', Cyso.config.destinationcloudurl),
+     application_credential_id=Cyso.config.OS_APPLICATION_CREDENTIAL_ID,
      application_credential_secret= password
     )
     sess = session.Session(auth=auth)
@@ -69,7 +69,7 @@ def create_vm_from_image(shared_data):
         name=vm_name,
         image=image_id,
         flavor="3bc4833f-dc05-4633-a6b1-8c764c4ce857",
-        nics=config.nics
+        nics=Cyso.config.nics
     )
     
     # Wait for VM to become active (check every 5 seconds, max 10 minutes)

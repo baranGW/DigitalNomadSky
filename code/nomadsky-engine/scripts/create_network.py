@@ -16,9 +16,9 @@ unique_id = sys.argv[5]
 
 if destination == 'azure':
       # Azure SDK code to find VM
-      sys.path.append(r"C:/projects/digitalnomadsky/code/Microsoft")
-      import config
-      from create_networking import create_network
+      sys.path.append(r"C:/Users/baran/Documents/school/Jaar2/DataDrivenBusiness/DigitalNomadSky/code")
+      import Microsoft.config
+      from Microsoft.create_networking import create_network
           
       try:
             nic = create_network(shared_data)
